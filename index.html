@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1717939696114759');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1717939696114759&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Neo Lite – Premium Learning Community</title>
@@ -69,6 +86,7 @@
     </div>
   </div>
   <script>
+    // Particles
     const container = document.getElementById('particles');
     const colors = ['#00cfff','#a855f7','#ffffff'];
     for (let i = 0; i < 20; i++) {
@@ -78,26 +96,37 @@
       p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};opacity:0.4;animation-duration:${Math.random()*14+8}s;animation-delay:${Math.random()*10}s;`;
       container.appendChild(p);
     }
+
+    // Lead sirf EK BAAR fire hoga — chahe button click karo ya auto redirect ho
+    let fired = false;
+
+    function fireAndRedirect() {
+      if (fired) return;
+      fired = true;
+      fbq('track', 'Lead');
+      window.location.href = 'https://t.me/+QwXaGdEXM_wwYzg1';
+    }
+
+    // Button click
+    document.getElementById('joinBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      fireAndRedirect();
+    });
+
+    // Auto countdown
     const TOTAL = 15;
     const numEl = document.getElementById('countNum');
     let remaining = TOTAL;
-    let fired = false;
     function tick() {
       remaining--;
       numEl.textContent = remaining;
       if (remaining <= 0) {
-        if (!fired) {
-          fired = true;
-          window.location.href = 'https://t.me/+QwXaGdEXM_wwYzg1';
-        }
+        fireAndRedirect();
       } else {
         setTimeout(tick, 1000);
       }
     }
     setTimeout(tick, 1000);
-    document.getElementById('joinBtn').addEventListener('click', function() {
-      fired = true;
-    });
   </script>
 </body>
 </html>

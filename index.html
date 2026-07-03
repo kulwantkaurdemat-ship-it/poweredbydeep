@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neo Lite – Premium Learning Community</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      min-height: 100vh;
+      background: #000814;
+      color: #e0e0ff;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0,180,255,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(120,0,255,0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      padding: 0 0 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Logo block */
+    .logo-block {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 20px 24px;
+      border-bottom: 1px solid rgba(0,180,255,0.15);
+      margin-bottom: 0;
+    }
+    .logo-block img {
+      width: 140px;
+      height: 140px;
+      object-fit: contain;
+      border-radius: 16px;
+      margin-bottom: 14px;
+      filter: drop-shadow(0 0 20px rgba(0,200,255,0.5));
+      animation: glow 3s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(0,200,255,0.4)); }
+      50% { filter: drop-shadow(0 0 30px rgba(0,200,255,0.8)); }
+    }
+    .channel-name {
+      font-size: 26px;
+      font-weight: 700;
+      color: #00cfff;
+      letter-spacing: 0.5px;
+    }
+
+    /* Scrolling ticker */
+    .ticker-wrap {
+      width: 100%;
+      overflow: hidden;
+      border-top: 1px solid rgba(0,180,255,0.15);
+      border-bottom: 1px solid rgba(0,180,255,0.15);
+      padding: 10px 0;
+      margin-bottom: 28px;
+      background: rgba(0,180,255,0.04);
+    }
+    .ticker-track {
+      display: flex;
+      gap: 40px;
+      white-space: nowrap;
+      animation: ticker 12s linear infinite;
+    }
+    .ticker-track span {
+      font-size: 13px;
+      color: #00cfff;
+      font-weight: 500;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Features list */
+    .features {
+      width: 100%;
+      padding: 0 24px;
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .feature-item {
+      font-size: 15px;
+      color: #c0d0e0;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Countdown */
+    .countdown-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 12px 24px;
+      background: rgba(0,180,255,0.06);
+      border-radius: 12px;
+      border: 1px solid rgba(0,180,255,0.15);
+    }
+    .countdown-icon { font-size: 22px; }
+    .countdown-text {
+      font-size: 17px;
+      font-weight: 600;
+      color: #00cfff;
+    }
+    .countdown-text span {
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    /* CTA Button */
+    .cta-btn {
+      display: block;
+      width: calc(100% - 48px);
+      padding: 16px;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 700;
+      color: #000;
+      background: linear-gradient(135deg, #00cfff 0%, #a855f7 100%);
+      text-decoration: none;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 24px rgba(0,200,255,0.3);
+      animation: pulse-btn 2.5s ease-in-out infinite;
+      transition: transform 0.15s;
+    }
+    .cta-btn:hover { transform: scale(1.02); }
+    @keyframes pulse-btn {
+      0%, 100% { box-shadow: 0 4px 24px rgba(0,200,255,0.3), 0 0 0 0 rgba(0,200,255,0.2); }
+      50% { box-shadow: 0 4px 24px rgba(0,200,255,0.3), 0 0 0 10px rgba(0,200,255,0); }
+    }
+
+    /* Disclaimer */
+    .disclaimer {
+      font-size: 11px;
+      color: #556070;
+      text-align: center;
+      line-height: 1.6;
+      padding: 0 24px;
+      margin-bottom: 12px;
+    }
+
+    /* Footer */
+    .footer {
+      font-size: 12px;
+      color: #445060;
+      text-align: center;
+    }
+    .footer a {
+      color: #00cfff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* Floating particles */
+    .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .particle { position: absolute; border-radius: 50%; animation: float linear infinite; }
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.3; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="particles" id="particles"></div>
+
+  <div class="page">
+
+    <!-- Logo -->
+    <div class="logo-block">
+      <img src="logo.png" alt="Neo Lite Logo" />
+      <div class="channel-name">Neo Lite</div>
+    </div>
+
+    <!-- Ticker -->
+    <div class="ticker-wrap">
+      <div class="ticker-track">
+        <span>🔔 Latest Updates</span>
+        <span>⚡ Instant Notifications</span>
+        <span>🔐 Private Access</span>
+        <span>📚 Expert Content</span>
+        <span>🔔 Latest Updates</span>
+        <span>⚡ Instant Notifications</span>
+        <span>🔐 Private Access</span>
+        <span>📚 Expert Content</span>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="features">
+      <div class="feature-item">🔒 Private channel access</div>
+      <div class="feature-item">📊 Regular content updates</div>
+      <div class="feature-item">✨ Simple user experience</div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-box">
+      <span class="countdown-icon">⏳</span>
+      <div class="countdown-text">Redirecting in: <span id="countNum">6</span> seconds</div>
+    </div>
+
+    <!-- CTA -->
+    <a class="cta-btn" href="https://t.me/+QwXaGdEXM_wwYzg1" id="joinBtn">
+      Join Telegram Channel
+    </a>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+      Disclaimer: Information shared is for general knowledge and educational use only. We are not responsible for any decisions made by users. Kindly proceed with proper research and responsibility.
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      🚀 <a href="https://wa.me/918360000565" target="_blank">Powered by Sukhdeep</a>
+    </div>
+
+  </div>
+
+  <script>
+    // Particles
+    const container = document.getElementById('particles');
+    const colors = ['#00cfff','#a855f7','#ffffff'];
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      const size = Math.random() * 2 + 1;
+      p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};opacity:0.4;animation-duration:${Math.random()*14+8}s;animation-delay:${Math.random()*10}s;`;
+      container.appendChild(p);
+    }
+
+    // Countdown — sirf ek baar Lead fire hoga (redirect pe)
+    const TOTAL = 6;
+    const numEl = document.getElementById('countNum');
+    let remaining = TOTAL;
+    let fired = false;
+
+    function tick() {
+      remaining--;
+      numEl.textContent = remaining;
+      if (remaining <= 0) {
+        if (!fired) {
+          fired = true;
+          window.location.href = 'https://t.me/+QwXaGdEXM_wwYzg1';
+        }
+      } else {
+        setTimeout(tick, 1000);
+      }
+    }
+    setTimeout(tick, 1000);
+
+    // Button click — manual join (pixel nahi hai isliye sirf redirect)
+    document.getElementById('joinBtn').addEventListener('click', function(e) {
+      fired = true;
+    });
+  </script>
+
+</body>
+</html>

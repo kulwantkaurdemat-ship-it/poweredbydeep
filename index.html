@@ -11,11 +11,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1717939696114759');
+fbq('init', '1784390716333108');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1717939696114759&ev=PageView&noscript=1"
+src="https://www.facebook.com/tr?id=1784390716333108&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
   <meta charset="UTF-8" />
@@ -37,10 +37,6 @@ src="https://www.facebook.com/tr?id=1717939696114759&ev=PageView&noscript=1"
     @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     .features { width: 100%; padding: 0 24px; margin-bottom: 28px; display: flex; flex-direction: column; gap: 12px; }
     .feature-item { font-size: 15px; color: #c0d0e0; text-align: center; padding: 10px; border-radius: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); }
-    .countdown-box { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; padding: 12px 24px; background: rgba(0,180,255,0.06); border-radius: 12px; border: 1px solid rgba(0,180,255,0.15); }
-    .countdown-icon { font-size: 22px; }
-    .countdown-text { font-size: 17px; font-weight: 600; color: #00cfff; }
-    .countdown-text span { font-weight: 800; font-size: 20px; }
     .cta-btn { display: block; width: calc(100% - 48px); padding: 16px; border-radius: 50px; text-align: center; font-size: 17px; font-weight: 700; color: #000; background: linear-gradient(135deg, #00cfff 0%, #a855f7 100%); text-decoration: none; margin-bottom: 28px; animation: pulse-btn 2.5s ease-in-out infinite; transition: transform 0.15s; }
     .cta-btn:hover { transform: scale(1.02); }
     @keyframes pulse-btn { 0%, 100% { box-shadow: 0 4px 24px rgba(0,200,255,0.3), 0 0 0 0 rgba(0,200,255,0.2); } 50% { box-shadow: 0 4px 24px rgba(0,200,255,0.3), 0 0 0 10px rgba(0,200,255,0); } }
@@ -74,10 +70,6 @@ src="https://www.facebook.com/tr?id=1717939696114759&ev=PageView&noscript=1"
       <div class="feature-item">📊 Regular content updates</div>
       <div class="feature-item">✨ Simple user experience</div>
     </div>
-    <div class="countdown-box">
-      <span class="countdown-icon">⏳</span>
-      <div class="countdown-text">Redirecting in: <span id="countNum">15</span> seconds</div>
-    </div>
     <a class="cta-btn" href="https://t.me/+QwXaGdEXM_wwYzg1" id="joinBtn">
       Join Telegram Channel
     </a>
@@ -97,36 +89,16 @@ src="https://www.facebook.com/tr?id=1717939696114759&ev=PageView&noscript=1"
       container.appendChild(p);
     }
 
-    // Lead sirf EK BAAR fire hoga — chahe button click karo ya auto redirect ho
+    // Lead sirf EK BAAR fire hoga — sirf button click par
     let fired = false;
 
-    function fireAndRedirect() {
+    document.getElementById('joinBtn').addEventListener('click', function(e) {
+      e.preventDefault();
       if (fired) return;
       fired = true;
       fbq('track', 'Lead');
       window.location.href = 'https://t.me/+QwXaGdEXM_wwYzg1';
-    }
-
-    // Button click
-    document.getElementById('joinBtn').addEventListener('click', function(e) {
-      e.preventDefault();
-      fireAndRedirect();
     });
-
-    // Auto countdown
-    const TOTAL = 15;
-    const numEl = document.getElementById('countNum');
-    let remaining = TOTAL;
-    function tick() {
-      remaining--;
-      numEl.textContent = remaining;
-      if (remaining <= 0) {
-        fireAndRedirect();
-      } else {
-        setTimeout(tick, 1000);
-      }
-    }
-    setTimeout(tick, 1000);
   </script>
 </body>
 </html>

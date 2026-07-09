@@ -35,6 +35,10 @@ src="https://www.facebook.com/tr?id=1044122897972341&ev=PageView&noscript=1"
     .ticker-track { display: flex; gap: 40px; white-space: nowrap; animation: ticker 12s linear infinite; }
     .ticker-track span { font-size: 13px; color: #00cfff; font-weight: 500; }
     @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .countdown-wrap { width: calc(100% - 48px); margin-bottom: 24px; padding: 14px 16px; border-radius: 14px; background: rgba(168,85,247,0.08); border: 1px solid rgba(168,85,247,0.25); text-align: center; }
+    .countdown-label { font-size: 12px; color: #c0a0ff; letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase; }
+    .countdown-timer { font-size: 28px; font-weight: 700; color: #ffffff; font-variant-numeric: tabular-nums; letter-spacing: 1px; }
+    .countdown-timer span.unit { font-size: 14px; color: #a855f7; font-weight: 600; margin-left: 4px; }
     .features { width: 100%; padding: 0 24px; margin-bottom: 28px; display: flex; flex-direction: column; gap: 12px; }
     .feature-item { font-size: 15px; color: #c0d0e0; text-align: center; padding: 10px; border-radius: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); }
     .cta-btn { display: block; width: calc(100% - 48px); padding: 16px; border-radius: 50px; text-align: center; font-size: 17px; font-weight: 700; color: #000; background: linear-gradient(135deg, #00cfff 0%, #a855f7 100%); text-decoration: none; margin-bottom: 28px; animation: pulse-btn 2.5s ease-in-out infinite; transition: transform 0.15s; }
@@ -73,6 +77,10 @@ src="https://www.facebook.com/tr?id=1044122897972341&ev=PageView&noscript=1"
     <a class="cta-btn" href="https://t.me/+QwXaGdEXM_wwYzg1" id="joinBtn">
       Join Telegram Channel
     </a>
+    <div class="countdown-wrap">
+      <div class="countdown-label">⏳ Limited Time Access Closing In</div>
+      <div class="countdown-timer" id="countdownTimer">00<span class="unit">sec</span></div>
+    </div>
     <div class="disclaimer">
       Disclaimer: Information shared is for general knowledge and educational use only. We are not responsible for any decisions made by users. Kindly proceed with proper research and responsibility.
     </div>
@@ -88,6 +96,20 @@ src="https://www.facebook.com/tr?id=1044122897972341&ev=PageView&noscript=1"
       p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};opacity:0.4;animation-duration:${Math.random()*14+8}s;animation-delay:${Math.random()*10}s;`;
       container.appendChild(p);
     }
+
+    // Countdown timer - 15 sec, loops back to 15 on reaching 0
+    let timeLeft = 15;
+    const timerEl = document.getElementById('countdownTimer');
+    function updateTimer() {
+      timerEl.innerHTML = String(timeLeft).padStart(2, '0') + '<span class="unit">sec</span>';
+      if (timeLeft <= 0) {
+        timeLeft = 15;
+      } else {
+        timeLeft--;
+      }
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
 
     // Lead sirf EK BAAR fire hoga — sirf button click par
     let fired = false;

@@ -97,29 +97,36 @@ src="https://www.facebook.com/tr?id=1044122897972341&ev=PageView&noscript=1"
       container.appendChild(p);
     }
 
-    // Countdown timer - 15 sec, loops back to 15 on reaching 0
-    let timeLeft = 15;
-    const timerEl = document.getElementById('countdownTimer');
-    function updateTimer() {
-      timerEl.innerHTML = String(timeLeft).padStart(2, '0') + '<span class="unit">sec</span>';
-      if (timeLeft <= 0) {
-        timeLeft = 15;
-      } else {
-        timeLeft--;
-      }
-    }
-    updateTimer();
-    setInterval(updateTimer, 1000);
-
-    // Lead sirf EK BAAR fire hoga — sirf button click par
+    // Lead sirf EK BAAR fire hoga — chahe button click se ho ya countdown khatam hone se
     let fired = false;
 
-    document.getElementById('joinBtn').addEventListener('click', function(e) {
-      e.preventDefault();
+    function goToTelegram() {
       if (fired) return;
       fired = true;
       fbq('track', 'Lead');
       window.location.href = 'https://t.me/+QwXaGdEXM_wwYzg1';
+    }
+
+    // Countdown timer - 15 sec, khatam hone par Telegram par redirect
+    let timeLeft = 15;
+    const timerEl = document.getElementById('countdownTimer');
+    let countdownInterval;
+    function updateTimer() {
+      timerEl.innerHTML = String(timeLeft).padStart(2, '0') + '<span class="unit">sec</span>';
+      if (timeLeft <= 0) {
+        clearInterval(countdownInterval);
+        goToTelegram();
+        return;
+      }
+      timeLeft--;
+    }
+    updateTimer();
+    countdownInterval = setInterval(updateTimer, 1000);
+
+    document.getElementById('joinBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      clearInterval(countdownInterval);
+      goToTelegram();
     });
   </script>
 </body>

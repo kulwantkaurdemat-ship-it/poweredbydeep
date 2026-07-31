@@ -75,7 +75,6 @@ src="https://www.facebook.com/tr?id=1387607430040261&ev=PageView&noscript=1"
     <a class="cta-btn" href="https://telegram.me/+o_lJCT4UdxJhYjU1" id="joinBtn">
       Join Telegram Channel
     </a>
-    <div class="redirect-note">Redirecting automatically in <b id="countdown">10</b>s...</div>
     <div class="disclaimer">
       Disclaimer: Information shared is for general knowledge and educational use only. We are not responsible for any decisions made by users. Kindly proceed with proper research and responsibility.
     </div>
@@ -110,18 +109,6 @@ src="https://www.facebook.com/tr?id=1387607430040261&ev=PageView&noscript=1"
       e.preventDefault();
       goToTelegram();
     });
-
-    // 10 second countdown -> auto redirect
-    let secondsLeft = 10;
-    const countdownEl = document.getElementById('countdown');
-    const countdownTimer = setInterval(function() {
-      secondsLeft--;
-      if (countdownEl) countdownEl.textContent = secondsLeft;
-      if (secondsLeft <= 0) {
-        clearInterval(countdownTimer);
-        goToTelegram();
-      }
-    }, 1000);
   </script>
 </body>
 </html>

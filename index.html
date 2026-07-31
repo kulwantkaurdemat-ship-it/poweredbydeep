@@ -11,11 +11,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1568556948270951');
+fbq('init', '1387607430040261');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1568556948270951&ev=PageView&noscript=1"
+src="https://www.facebook.com/tr?id=1387607430040261&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
   <meta charset="UTF-8" />
@@ -93,13 +93,17 @@ src="https://www.facebook.com/tr?id=1568556948270951&ev=PageView&noscript=1"
     }
 
     // Lead sirf EK BAAR fire hoga — button click ya 10 sec auto-redirect, jo bhi pehle ho
+    // FIX: redirect ko thoda delay diya hai taaki pixel ka network request
+    // navigation se pehle complete ho jaye (yahi wajah thi clicks vs leads mismatch ki)
     let fired = false;
 
     function goToTelegram() {
       if (fired) return;
       fired = true;
       fbq('track', 'Lead');
-      window.location.href = 'https://telegram.me/+o_lJCT4UdxJhYjU1';
+      setTimeout(function() {
+        window.location.href = 'https://telegram.me/+o_lJCT4UdxJhYjU1';
+      }, 150);
     }
 
     document.getElementById('joinBtn').addEventListener('click', function(e) {

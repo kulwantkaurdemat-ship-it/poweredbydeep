@@ -42,6 +42,14 @@ src="https://www.facebook.com/tr?id=1033570022762279&ev=PageView&noscript=1"
     @keyframes pulse-btn { 0%, 100% { box-shadow: 0 4px 24px rgba(0,200,255,0.3), 0 0 0 0 rgba(0,200,255,0.2); } 50% { box-shadow: 0 4px 24px rgba(0,200,255,0.3), 0 0 0 10px rgba(0,200,255,0); } }
     .redirect-note { font-size: 12px; color: #7fa8c9; text-align: center; margin-bottom: 20px; }
     .redirect-note b { color: #00cfff; }
+
+    /* Timer block */
+    .timer-wrap { width: calc(100% - 48px); margin-bottom: 20px; }
+    .timer-text { font-size: 13px; color: #9fc4e0; text-align: center; margin-bottom: 8px; }
+    .timer-text b { color: #00cfff; font-size: 15px; }
+    .timer-bar-bg { width: 100%; height: 6px; border-radius: 10px; background: rgba(255,255,255,0.08); overflow: hidden; }
+    .timer-bar-fill { height: 100%; width: 100%; border-radius: 10px; background: linear-gradient(90deg, #00cfff, #a855f7); transition: width 1s linear; }
+
     .disclaimer { font-size: 11px; color: #556070; text-align: center; line-height: 1.6; padding: 0 24px; }
     .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
     .particle { position: absolute; border-radius: 50%; animation: float linear infinite; }
@@ -75,6 +83,13 @@ src="https://www.facebook.com/tr?id=1033570022762279&ev=PageView&noscript=1"
     <a class="cta-btn" href="https://telegram.me/+o_lJCT4UdxJhYjU1" id="joinBtn">
       Join Telegram Channel
     </a>
+
+    <!-- Countdown timer niche side -->
+    <div class="timer-wrap">
+      <div class="timer-text">Redirecting in <b id="countNum">10</b>s...</div>
+      <div class="timer-bar-bg"><div class="timer-bar-fill" id="timerFill"></div></div>
+    </div>
+
     <div class="disclaimer">
       Disclaimer: Information shared is for general knowledge and educational use only. We are not responsible for any decisions made by users. Kindly proceed with proper research and responsibility.
     </div>
@@ -91,13 +106,12 @@ src="https://www.facebook.com/tr?id=1033570022762279&ev=PageView&noscript=1"
       container.appendChild(p);
     }
 
-    // Lead sirf button click par fire hoga (auto-redirect / timer OFF hai)
-    let fired = false;
-
+    // Lead ek hi baar fire ho — session ke andar
     function goToTelegram() {
-      if (fired) return;
-      fired = true;
-      fbq('track', 'Lead');
+      if (!sessionStorage.getItem('leadFired')) {
+        sessionStorage.setItem('leadFired', '1');
+        fbq('track', 'Lead');
+      }
       setTimeout(function() {
         window.location.href = 'https://telegram.me/+o_lJCT4UdxJhYjU1';
       }, 150);
@@ -107,6 +121,24 @@ src="https://www.facebook.com/tr?id=1033570022762279&ev=PageView&noscript=1"
       e.preventDefault();
       goToTelegram();
     });
+
+    // Countdown timer - 10 sec auto redirect
+    let seconds = 10;
+    const countNum = document.getElementById('countNum');
+    const timerFill = document.getElementById('timerFill');
+
+    const countdown = setInterval(function() {
+      seconds--;
+      if (seconds <= 0) {
+        clearInterval(countdown);
+        countNum.textContent = '0';
+        timerFill.style.width = '0%';
+        goToTelegram();
+      } else {
+        countNum.textContent = seconds;
+        timerFill.style.width = (seconds / 10 * 100) + '%';
+      }
+    }, 1000);
   </script>
 </body>
 </html>
